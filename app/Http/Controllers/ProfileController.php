@@ -66,7 +66,7 @@ class ProfileController extends Controller
     }
 
     public function uploadImg(ImageRequest $request): RedirectResponse
-    {   
+    {
         $id = $request->user()->id;
         $file_name = date('Ymd_His_').$request->profile_images->getClientOriginalName();
 

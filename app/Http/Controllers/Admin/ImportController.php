@@ -23,7 +23,7 @@ class ImportController extends Controller
         $file_name = date('Ymd_His_').$request->csv_import->getClientOriginalName();
         $file_path = storage_path('app\\data\\'.$file_name);
 
-        DB::insert('INSERT INTO dbo.imports (name, path, status, created_by) 
+        DB::insert('INSERT INTO dbo.imports (name, path, status, created_by)
                     VALUES (?,?,?,?)',
                     [$file_name, $file_path, 0, Auth::user()->name]);
         $import = DB::select('SELECT top(1) * FROM dbo.imports ORDER BY dbo.imports.id DESC')[0];
@@ -34,7 +34,7 @@ class ImportController extends Controller
         $path = $file_path;
 
         ImportTeachersCsv::dispatch($path, $teacherImport)->delay(10);
-        return response()->json('Tải file thành côngs');
+        return response()->json('Tải file thành công');
     }
 
     public function importStudent() {
@@ -45,11 +45,11 @@ class ImportController extends Controller
         $file_name = date('Ymd_His_').$request->csv_import->getClientOriginalName();
         $file_path = storage_path('app\\data\\'.$file_name);
 
-        DB::insert('INSERT INTO dbo.imports (name, path, status, created_by) 
+        DB::insert('INSERT INTO dbo.imports (name, path, status, created_by)
                     VALUES (?,?,?,?)',
                     [$file_name, $file_path, 0, Auth::user()->name]);
         $import = DB::select('SELECT top(1) * FROM dbo.imports ORDER BY dbo.imports.id DESC')[0];
-        
+
         $request->csv_import->move(storage_path('app\\data\\'), $file_name);
 
         $studentImport = $import;
@@ -67,11 +67,11 @@ class ImportController extends Controller
         $file_name = date('Ymd_His_').$request->csv_import->getClientOriginalName();
         $file_path = storage_path('app\\data\\'.$file_name);
 
-        DB::insert('INSERT INTO dbo.imports (name, path, status, created_by) 
+        DB::insert('INSERT INTO dbo.imports (name, path, status, created_by)
         VALUES (?,?,?,?)',
         [$file_name, $file_path, 0, Auth::user()->name]);
         $import = DB::select('SELECT top(1) * FROM dbo.imports ORDER BY dbo.imports.id DESC')[0];
-        
+
         $request->csv_import->move(storage_path('app\\data\\'), $file_name);
 
         $subjectImport = $import;
